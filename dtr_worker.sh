@@ -44,7 +44,7 @@ function get_replicas () {
   echo " connecting to UCP for a token and the list of DTR replicas"
 
   token=$(curl -sk -d '{"username":"'$username'","password":"'$password'"}' https://$ucp_server/auth/login | jq -r .auth_token)
-  replicas=$(curl -skX GET "https://$ucp_server/containers/json" -H  "accept: application/json" -H "Authorization: Bearer $token" | jq -r '.[] | select (.Image | contains("docker/dtr-nginx")) | .Labels."com.docker.compose.service" '|sed -e 's/nginx-//g')
+  replicas=$(curl -skX GET "https://$ucp_server/containers/json" -H  "accept: application/json" -H "Authorization: Bearer $token" | jq -r '.[] | select (.Image | contains("docker/dtr-nginx") or contains("mirantis/dtr-nginx") or contains("mirantiseng/dtr-nginx")) | .Labels."com.docker.compose.service" '|sed -e 's/nginx-//g')
 }
 
 
