@@ -24,11 +24,16 @@ You may build a Docker image and then run the image wherever you so chose. Or, y
 1. Run the script:
 
     ```
-    username=admin-user; \
-    ucp_server=ucp.example.com; \
-    dtr_server=dtr.example.com; \
-    read -sp 'Password: ' password; ./dtr_worker.sh <command>
+	username=admin-user ucp_server=ucp.example.com dtr_server=dtr.example.com password=<password> ./dtr_worker.sh <command>
     ```
+
+If you prefer not to expose your password on the command line:
+   ```
+   read -sp 'Password: ' password
+   export password
+   username=admin-user ucp_server=ucp.example.com dtr_server=dtr.example.com ./dtr_worker.sh <command>
+   unset password
+   ```
 
 ## Usage
 
